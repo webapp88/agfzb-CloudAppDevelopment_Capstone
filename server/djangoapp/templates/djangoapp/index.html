@@ -16,15 +16,41 @@
     <body>
     <!-- Remove this line the first time you edit this file -->
 
-    <!--Add a nav bar here -->
+<!--Add a nav bar here -->
     <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
             <div class="navbar-header">
-                  <a class="navbar-brand" href="about">about</a>
-                  <a class="navbar-brand" href="contact">contact</a>
+                  <a class="navbar-brand" href="{% url 'djangoapp:about' %}">about</a>
+                  <a class="navbar-brand" href="{% url 'djangoapp:contact' %}">contact</a>
             </div>
         </div>
     </nav>
+
+
+ <!--Add login, logout and registration form here -->
+ {% if user.is_authenticated %}
+ <div class="rightalign">
+     <div class="dropdown">
+         <button class="dropbtn">{{user.first_name}}</button>
+         <div class="dropdown-content">
+             <a href="{% url 'djangoapp:logout' %}">Logout</a>
+         </div>
+     </div>
+ </div>
+ {% else %}
+ <div class="rightalign">
+     <div class="dropdown">
+         <form action="{% url 'djangoapp:registration' %}" method="get">
+             <input class="dropbtn"  type="submit" value="Visitor">
+             <div class="dropdown-content">
+                 <a href="{% url 'djangoapp:registration' %}">Signup</a>
+                 <a href="{% url 'djangoapp:login' %}">Login</a>
+             </div>
+         </form>
+     </div>
+ </div>
+{% endif %}
+
 
     <!--Add a dealer table here -->
 
